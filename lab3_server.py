@@ -1,5 +1,6 @@
 import random
 
+import cherrypy
 import pandas as pd
 from flask import Flask, request, json
 
@@ -31,10 +32,8 @@ def get_ratings_route():
 
 @app.route('/ratings', methods=['DELETE'])
 def delete_ratings_route():
-    # request_dict = dict(json.loads(request.get_data()))
 
     global df
-    # df.query(f'userID=={request_dict["userID"]}').drop()
     df = df[0:0]
     return "OK"
 
@@ -60,5 +59,12 @@ def avg_per_user_route(userID):
     return json.dumps(genre_averages_dict)
 
 
+cherrypy.tree.graft(app.wsgi_app, '/')
+cherrypy.config.update({'server.socket_host': '0.0.0.0',
+                        'server.socket_port': 5000,
+                        'engine.autoreload.on': False,
+                        })
+
 if __name__ == '__main__':
-    app.run()
+    app.run()  # flask app
+    #cherrypy.engine.start()  # cherrypy app
