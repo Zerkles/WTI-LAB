@@ -17,11 +17,11 @@ def get_prepared_df():
 
 if __name__ == "__main__":
     # exc1
-    joined_df = get_prepared_df()
-    print(joined_df)
+    prepared_df = get_prepared_df()
+    print(prepared_df)
 
     # exc2
-    for row in joined_df[0:10].iterrows():
+    for row in prepared_df[0:10].iterrows():
         print(row[1].to_json())
 
     # exc3
@@ -31,3 +31,11 @@ if __name__ == "__main__":
     # Zamiast wykonywania testowania ręcznego przy uzyciu POSTmana, napisano testy jednostkowe spełniające tę samą
     # funkcjonalność, testy te znajdują się w tests/lab3_tests. Każdy punky końcowy aplikacji można przetestować osobno
     # oraz została również przyogotwana specjalna sekwencja pokazująca prawidłowe współdziałanie całego API.
+
+    # exc 5 oraz 6
+    # Kod znajduje się w pliku lab3_client.py
+
+    # exc 7
+    # Aby uruchomić wielowątkowego klienta należy użyć funkcji multithreaded_run_sequence() z pliku lab3_client.py
+    # Aby uruchomić flaskowy serwer w wielowątkowym cherrypy należy w sekcji main pliku lab3_server.py zakomentować
+    # linię app.run() a odkomentować linię cherrypy.engine.start()
