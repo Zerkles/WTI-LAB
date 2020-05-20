@@ -24,9 +24,10 @@ def empty_queue():
 
 conn = redis.StrictRedis(host="127.0.0.1", port="6381", decode_responses=True)
 
-push_queue("imiona", ["bob"])
-push_queue("imiona", ["jacek", "placek"])
-read_all_from_queue("imiona")
-# print(read_one_from_queue("imiona"))
-# print(read_one_from_queue("imiona"))
-# print(read_one_from_queue("imiona"))
+if __name__ == "__main__":
+    push_queue("imiona", ["bob"])
+    push_queue("imiona", ["jacek", "placek"])
+    read_all_from_queue("imiona")
+    # print(read_one_from_queue("imiona"))
+    # print(read_one_from_queue("imiona"))
+    # print(read_one_from_queue("imiona"))
