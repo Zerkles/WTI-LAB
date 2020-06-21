@@ -48,7 +48,7 @@ class TestLab3_5(unittest.TestCase):
         print(json.loads(request_result.content))
 
     def test_get_avg_genre_one_user(self):
-        route = '/avg-genre-ratings/75'
+        route = '/avg-genre-ratings/78'
         print(route)
         request_result = requests.get(url=server_address + route)
         assert request_result.status_code == 200
