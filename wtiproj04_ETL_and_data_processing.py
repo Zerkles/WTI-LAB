@@ -1,5 +1,7 @@
 import pandas as pd
 
+import wtiproj05_API_client
+
 
 def exercise_1(user_ratedmovies_data: pd.DataFrame, movie_genres_data: pd.DataFrame):
     # initialize data of lists.
@@ -52,28 +54,10 @@ def calculate_mean_rating_for_genres(user_genre, g):
     return mean_genres
 
 
-def prepare_dataframe_to_verify(user_ratedmovies_data: pd.DataFrame, movie_genres_data: pd.DataFrame):
-    user_ratedmovies_data = user_ratedmovies_data[['userID', 'movieID', 'rating']]
-    user_ratedmovies_data.fillna(0).astype(int)
-
-    result = user_ratedmovies_data.merge(movie_genres_data, on='movieID')
-    result = result.fillna(0)
-
-    result['genre'].replace({'Action': 'genre-Action', 'Adventure': "genre-Adventure", 'Animation': "genre-Animation",
-                             'Children': "genre-Children", 'Comedy': "genre-Comedy", 'Crime': "genre-Crime",
-                             'Documentary': "genre-Documentary", 'Drama': "genre-Drama", 'Fantasy': "genre-Fantasy",
-                             'Film-Noir': "genre-Film-Noir", 'Horror': "genre-Horror", 'IMAX': "genre-IMAX",
-                             'Musical': "genre-Musical", 'Mystery': "genre-Mystery", "Romance": "genre-Romance",
-                             "Sci-Fi": "genre-Sci-Fi", "Short": "genre-Short", "Thriller": "genre-Thriller",
-                             "War": "genre-War", "Western": "genre-Western"}, inplace=True)
-
-    return result
-
-
-def calculate_mean_rating_for_user(user_id, df, g):
+def calculate_mean_rating_for_user(user_id, df, genres):
     mean_rating_for_user = {}
-    for genre in g:
-        mean_rating_for_user[genre] = df[(df['userID'] == user_id) & (df['genre'] == genre)]['rating'].mean()
+    for genre in genres:
+        mean_rating_for_user[genre] = df[(df['userID'] == user_id) & (df[genre] == 1)]['rating'].mean()
 
     return mean_rating_for_user
 
@@ -103,11 +87,8 @@ if __name__ == '__main__':
     # check_if_conversion_is_correct(result[0], result3)
     # exercise 5
     result4 = (calculate_mean_rating_for_genres(result[0], result[1]))
-    result5 = prepare_dataframe_to_verify(user_ratedmovies_data, movie_genres_data)
-    print(result[0])
-    print("------------------")
-    print(result5)
     # exercise 6
-    result6 = calculate_mean_rating_for_user(75, result5, result[1])
+    result6 = calculate_mean_rating_for_user(75, result[0], result[1])
+    print(result6)
     # exercise 7
     result7 = calculate_user_profile_ratings(result6, result4)

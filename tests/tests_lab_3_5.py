@@ -3,10 +3,10 @@ import unittest
 
 import requests
 
-post_payload = {"userID": 75.0, "movieID": 3.0, "rating": 1.0, "Action": 0.0, "Adventure": 1.0, "Animation": 0.0,
-                "Children": 0.0, "Comedy": 0.0, "Crime": 1.0, "Documentary": 0.0, "Drama": 0.0, "Fantasy": 0.0,
-                "Film-Noir": 0.0, "Horror": 0.0, "IMAX": 0.0, "Musical": 0.0, "Mystery": 0.0, "Romance": 0.0,
-                "Sci-Fi": 0.0, "Short": 0.0, "Thriller": 0.0, "War": 0.0, "Western": 0.0}
+post_payload = {"userID": 75.0, "movieID": 4.0, "rating": 2.3, "genre-Action": 0.0, "genre-Adventure": 1.0, "genre-Animation": 0.0,
+                "genre-Children": 0.0, "genre-Comedy": 0.0, "genre-Crime": 1.0, "genre-Documentary": 1.0, "genre-Drama": 0.0, "genre-Fantasy": 0.0,
+                "genre-Film-Noir": 0.0, "genre-Horror": 0.0, "genre-IMAX": 0.0, "genre-Musical": 0.0, "genre-Mystery": 0.0, "genre-Romance": 0.0,
+                "genre-Sci-Fi": 0.0, "genre-Short": 0.0, "genre-Thriller": 0.0, "genre-War": 0.0, "genre-Western": 0.0}
 server_address = 'http://localhost:5000'
 
 

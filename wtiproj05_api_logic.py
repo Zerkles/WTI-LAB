@@ -1,10 +1,10 @@
-import json
 
 import pandas as pd
 
-from wtiproj04_ETL_and_data_processing import calculate_mean_rating_for_genres, calculate_mean_rating_for_user, prepare_dataframe_to_verify
+from wtiproj04_ETL_and_data_processing import calculate_mean_rating_for_genres, calculate_mean_rating_for_user
 
-df: pd.DataFrame = None
+
+df: pd.DataFrame = pd.DataFrame()
 user_ratedmovies_data = pd.read_table("resources/user_ratedmovies.dat")
 movie_genres_data = pd.read_table('resources/movie_genres.dat')
 
@@ -14,6 +14,7 @@ def insert_rating(data: dict):
 
     global df
     df = df.append(series, ignore_index=True)
+    print(df.loc[df['userID'] == 75])
 
 
 def get_ratings():
@@ -32,13 +33,11 @@ def get_genre_avg_rating_all_users():
     return genre_averages_dict
 
 
-def get_genre_avg_rating_for_user(user_id: int):
+def get_genre_avg_rating_for_user(user_id: float):
     global df, user_ratedmovies_data, movie_genres_data
 
     keys = [x for x in df.keys().tolist() if x not in ['userID', 'movieID', 'rating']]
-    # TODO: nie działa tutaj bo prepare_datafram pobiera nowe dane z pliku a nie istniejącego z df, trzeba przerobić tą funkcję w lab04
-    prepared_df = prepare_dataframe_to_verify(user_ratedmovies_data, movie_genres_data)
-    genre_averages_dict = calculate_mean_rating_for_user(75, prepared_df, keys)
+    genre_averages_dict = calculate_mean_rating_for_user(float(user_id), df, keys)
 
     # TODO: dobrze zwraca czy powinien wykonać jeszcze jeden krok i zwrócić profil ?
     return genre_averages_dict
