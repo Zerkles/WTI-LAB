@@ -1,7 +1,8 @@
 import random
+
 import pandas as pd
-import requests
-from flask import Flask, request, json, abort
+from flask import Flask, request, json
+
 import exercises.lab03 as lab03
 
 app = Flask(__name__)
@@ -30,11 +31,10 @@ def get_ratings_route():
 
 @app.route('/ratings', methods=['DELETE'])
 def delete_ratings_route():
-
     global df
     df = df.drop(request.json['userID'])
 
-    #df = df[0:0]
+    # df = df[0:0]
     return "OK"
 
 
@@ -61,4 +61,4 @@ def avg_per_user_route(userID):
 
 if __name__ == '__main__':
     app.run()  # flask app
-    #cherrypy.engine.start()  # cherrypy app
+    # cherrypy.engine.start()  # cherrypy app
