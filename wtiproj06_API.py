@@ -1,7 +1,7 @@
 from flask import Flask, json, request, Response
 
-import wtiproj05_API_logic as api
-from wtiproj04_ETL_and_data_processing import exercise_1
+import wtiproj06_API_logic as api
+import wtiproj06_simple_cassandra_client
 
 app = Flask(__name__)
 
@@ -37,6 +37,6 @@ def avg_per_user_route(userID):
 
 
 if __name__ == '__main__':
-    # api.df = exercise_1(api.user_ratedmovies_data, api.movie_genres_data)[0] # uncomment for full data
-    api.df = exercise_1(api.user_ratedmovies_data, api.movie_genres_data)[0][:0]
-    app.run(threaded=True)  # flask app
+    wtiproj06_simple_cassandra_client.prepare_db()
+    api.prepare_keys()
+    app.run()  # flask app

@@ -2,7 +2,7 @@ import random
 
 import cherrypy
 import pandas as pd
-from flask import Flask, request, json
+from flask import Flask, request, json, Response
 
 import wtiproj03_ETL
 
@@ -21,7 +21,7 @@ def rating_route():
     global df
     df = df.append(series, ignore_index=True)
 
-    return "OK"
+    return Response(status=201)
 
 
 @app.route('/ratings', methods=['GET'])

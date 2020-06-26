@@ -1,7 +1,5 @@
 import pandas as pd
 
-import wtiproj05_API_client
-
 
 def exercise_1(user_ratedmovies_data: pd.DataFrame, movie_genres_data: pd.DataFrame):
     # initialize data of lists.
@@ -43,7 +41,7 @@ def dictionary_to_dataframe(data):
 def check_if_conversion_is_correct(primary_df, secondary_df):
     df = pd.concat([primary_df, secondary_df])
     df_diff = df.drop_duplicates(keep=False)
-    # print(df_diff)
+    print(df_diff)
 
 
 def calculate_mean_rating_for_genres(user_genre, g):
@@ -80,15 +78,15 @@ if __name__ == '__main__':
     # exercise 1
     result = exercise_1(user_ratedmovies_data, movie_genres_data)
     # exercise 2
-    # result2 = dataframe_to_dictionary(result[0])
+    result2 = dataframe_to_dictionary(result[0][:50])
     # exercise 3
-    # result3 = dictionary_to_dataframe(result2)
+    result3 = dictionary_to_dataframe(result2)
     # exercise 4
-    # check_if_conversion_is_correct(result[0], result3)
+    check_if_conversion_is_correct(result[0][:50], result3)
     # exercise 5
-    result4 = (calculate_mean_rating_for_genres(result[0], result[1]))
+    result4 = (calculate_mean_rating_for_genres(result[0][:50], result[1]))
     # exercise 6
-    result6 = calculate_mean_rating_for_user(75, result[0], result[1])
-    print(result6)
+    result6 = calculate_mean_rating_for_user(75, result[0][:50], result[1])
+    # print(result6)
     # exercise 7
     result7 = calculate_user_profile_ratings(result6, result4)
